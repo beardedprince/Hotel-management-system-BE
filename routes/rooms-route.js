@@ -26,6 +26,32 @@ roomsRoute.get('/rooms', (req, res) => {
         } else {
             res.status(200).send(rooms)
         }
+    }).populate('roomBooked')
+})
+
+roomsRoute.get('/room/available', (req, res) => {
+    Rooms.count({status: 'Available'}, (err, rooms) => {
+        if(err) {
+            res.status(400).send('Error getting rooms')
+        } else {
+            res.status(200).json({
+                status: 'success',
+                data: rooms
+            })
+        }
+    })
+})
+
+roomsRoute.get('/room/unavailable', (req, res) => {
+    Rooms.count({status: 'Booked'}, (err, rooms) => {
+        if(err) {
+            res.status(400).send('Error getting rooms')
+        } else {
+            res.status(200).json({
+                status: 'success',
+                data: rooms
+            })
+        }
     })
 })
 
@@ -38,6 +64,21 @@ roomsRoute.get('/room/:id', (req, res) => {
         }
     })
 })
+
+
+roomsRoute.get('/allrooms', async (req, res) => {
+   await Rooms.estimatedDocumentCount({}, (err, result) => {
+        if(err) {
+            console.log('err')
+        } else {
+            res.status(200).json({
+                status: 'success',
+                data: result
+            })
+        }
+    }).sort({ date: -1})
+})
+
 
 
 module.exports = roomsRoute

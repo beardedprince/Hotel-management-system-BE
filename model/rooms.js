@@ -20,6 +20,7 @@ const roomSchema = Schema({
     //         book_to: String
     //     }
     // ]
-})
+}, {timestamps: true}
+)
 
 module.exports = mongoose.model('room', roomSchema)

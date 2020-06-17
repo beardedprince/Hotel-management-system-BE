@@ -42,7 +42,7 @@ userRoute.post('/login', async (req, res) => {
 
 
 userRoute.get('/users', (req, res) => {
-    Users.find({}, '-password -__v', (err, result) => {
+    Users.find({}, ' -__v', (err, result) => {
         if (err) {
             res.status(400).send('failed to get users')
         } else {

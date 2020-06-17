@@ -3,17 +3,21 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const bookingSchema = Schema({
-    date_in: {
+    fname: String,
+    lname: String,
+    email: String,
+    phone: String,
+    checkInDate: {
         type: Date
     },
-    date_out: {
+    checkOutDate: {
         type: Date
     },
-    status: String,
-    reservedBy: {
-        type: mongoose.Types.ObjectId,
-        ref: 'user'
+    roomBooked: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'room'
     }
-})
+}, 
+{ timestamps: true})
 
 module.exports = mongoose.model('booking', bookingSchema)
