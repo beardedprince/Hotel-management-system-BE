@@ -29,15 +29,15 @@ bookingsRoute.get('/bookings', (req, res) => {
     }).populate('roomBooked');
 })
 
-// bookingsRoute.get('/room/:id', (req, res) => {
-//     Rooms.findById(req.params.id, (err, data) => {
-//         if(err) {
-//             res.status(400).send('Error getting room by its ID')
-//         } else {
-//             res.status(200).send(data)
-//         }
-//     })
-// })
+bookingsRoute.get('/booking/guest/:id', (req, res) => {
+    Bookings.findById(req.params.id, (err, data) => {
+        if(err) {
+            res.status(400).send('Error getting room by its ID')
+        } else {
+            res.status(200).send(data)
+        }
+    })
+})
 
 bookingsRoute.get('/all-bookings', async (req, res) => {
     await Bookings.estimatedDocumentCount({}, (err, result) => {
