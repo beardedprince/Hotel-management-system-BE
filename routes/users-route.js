@@ -40,7 +40,7 @@ userRoute.post('/login', async (req, res) => {
     })
 })
 
-
+// get all users
 userRoute.get('/users', (req, res) => {
     Users.find({}, ' -__v', (err, result) => {
         if (err) {
