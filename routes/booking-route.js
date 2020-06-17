@@ -30,7 +30,7 @@ bookingsRoute.get('/bookings', (req, res) => {
         } else {
             res.status(200).send(result)
         }
-    }).populate('roomID');
+    }).populate('roomID').sort({fname: -1});
 })
 
 bookingsRoute.get('/booking/guest/:id', (req, res) => {
