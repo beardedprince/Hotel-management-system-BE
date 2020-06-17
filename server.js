@@ -1,14 +1,17 @@
 const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
-
-const config = require('./config/db')
-const userRoute = require('./routes/users-route')
-const roomsRoute = require('./routes/rooms-route')
-
+const dotenv = require('dotenv')
 
 const app = express()
 const port = process.env.PORT || 3000
+
+
+const userRoute = require('./routes/users-route')
+const roomsRoute = require('./routes/rooms-route')
+const config = require('./config/db')
+
+
 
 app.use(bodyParser.json())
 app.use(cors())
