@@ -13,7 +13,7 @@ const bookingSchema = Schema({
     checkOutDate: {
         type: Date
     },
-    roomBooked: {
+    roomID: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'room'
     }

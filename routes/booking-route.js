@@ -6,14 +6,18 @@ const Bookings = require('../model/bookings')
 
 
 
-bookingsRoute.post('/bookings', (req, res) => {
-    const bookingData = req.body
-    const newBooking = new Bookings(bookingData)
+bookingsRoute.post('/booking/:id', (req, res) => {
+    const roombody = req.body
+    roombody.roomID = req.params.id
+    const newBooking = new Bookings(roombody)
     newBooking.save((err, data) => {
         if(err) {
             res.status(400).send(' Error creating new booking')
         } else {
-            res.status(201).send(data)
+            res.status(200).json({
+                message: 'comment successful',
+                data: data
+            })
         }
     })
 })
@@ -26,7 +30,7 @@ bookingsRoute.get('/bookings', (req, res) => {
         } else {
             res.status(200).send(result)
         }
-    }).populate('roomBooked');
+    }).populate('roomID');
 })
 
 bookingsRoute.get('/booking/guest/:id', (req, res) => {
@@ -36,7 +40,7 @@ bookingsRoute.get('/booking/guest/:id', (req, res) => {
         } else {
             res.status(200).send(data)
         }
-    })
+    }).populate('roomID');
 })
 
 bookingsRoute.get('/all-bookings', async (req, res) => {
