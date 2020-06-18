@@ -65,6 +65,45 @@ roomsRoute.get('/room/:id', (req, res) => {
     })
 })
 
+// edit rooms
+// roomsRoute.put('/room/:id', (req, res) => {
+//     Rooms.findById(req.params.id, (err, data) => {
+//         if(err) {
+//             res.status(400).send('Error getting room by its ID')
+//         } else {
+//             data.room_number = req.body.room_number
+//             data.image_url = req.body.image_url
+//             data.status = req.body.status
+//             data.room_type = req.body.room_type
+//             data.beds = req.body.beds
+//             data.max_occupancy = req.body.max_occupancy
+//             data.cost_per_night = req.body.cost_per_night
+//             data.description = req.body.description
+
+//             data.save()
+
+//             res.status(200).json({
+//                 message: data
+//             })
+//         }
+//     })
+// })
+
+
+roomsRoute.delete('/room/:id', async (req, res) => {
+   await Rooms.findByIdAndRemove(req.params.id, (err, result) => {
+        if(err) {
+            console.log('err')
+            res.status()
+        } else {
+            res.status(200).json({
+                status: 'deleted successfully',
+                data: result
+            })
+        }
+    }).sort({ date: -1})
+})
+
 
 roomsRoute.get('/allrooms', async (req, res) => {
    await Rooms.estimatedDocumentCount({}, (err, result) => {
